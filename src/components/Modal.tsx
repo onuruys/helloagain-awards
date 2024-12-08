@@ -1,15 +1,10 @@
 import { closeModal } from "@reducers/modalSlice";
 import type { AppDispatch, RootState } from "@store/store";
 import React from "react";
-import {
-  Alert,
-  Modal as RNModal,
-  StyleSheet,
-  Text,
-  Pressable,
-  View,
-} from "react-native";
+import { Modal as RNModal, StyleSheet, Text, Pressable } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import Icon from "./Icon";
+import ModalType from "@enums/ModalType";
 
 interface IModalProps {
   isOpen?: boolean;
@@ -17,7 +12,9 @@ interface IModalProps {
 }
 
 function Modal(props: IModalProps) {
-  const { isOpen } = useSelector((state: RootState) => state.modal);
+  const { isOpen, modalType, message } = useSelector(
+    (state: RootState) => state.modal
+  );
   const dispatch = useDispatch<AppDispatch>();
 
   function onClose() {
@@ -25,23 +22,62 @@ function Modal(props: IModalProps) {
     dispatch(closeModal());
   }
 
+  function status(type: ModalType) {
+    switch (type) {
+      case ModalType.INFO:
+        return {
+          name: "information",
+          color: "blue",
+          defaultMessage: "Information",
+        };
+      case ModalType.ERROR:
+        return {
+          name: "close",
+          color: "red",
+          defaultMessage: "Error",
+        };
+      case ModalType.SUCCESS:
+        return {
+          name: "checkmark",
+          color: "green",
+          defaultMessage: "Success",
+        };
+      case ModalType.WARNING:
+        return {
+          name: "alert",
+          color: "orange",
+          defaultMessage: "Warning",
+        };
+      default:
+        return {
+          name: "alert-circle",
+          color: "black",
+          defaultMessage: "",
+        };
+    }
+  }
+
+  const { name, color, defaultMessage } = status(modalType);
+
   return (
     <RNModal
+      onDismiss={onClose}
       animationType="slide"
       transparent={true}
       visible={isOpen}
       onRequestClose={() => {
-        Alert.alert("Modal has been closed.");
         onClose();
       }}
     >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Pressable style={[styles.button, styles.buttonClose]} onPress={onClose}>
-            <Text style={styles.textStyle}>Hide Modal</Text>
+      <Pressable style={styles.centeredView} onPress={onClose}>
+        <Pressable style={styles.modalView}>
+          <Icon name={name} size={48} color={color} />
+          <Text style={styles.modalText}>{message || defaultMessage}</Text>
+          <Pressable onPress={onClose} style={styles.close}>
+            <Icon name="close" size={24} />
           </Pressable>
-        </View>
-      </View>
+        </Pressable>
+      </Pressable>
     </RNModal>
   );
 }
@@ -50,7 +86,7 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    zIndex: -1,
   },
   modalView: {
     margin: 20,
@@ -66,23 +102,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    zIndex: 1,
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
+
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+  },
+  close: {
+    position: "absolute",
+    top: 10,
+    right: 10,
   },
 });
 

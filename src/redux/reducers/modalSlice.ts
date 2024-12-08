@@ -1,10 +1,13 @@
 import ModalType from "@enums/ModalType";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
+
 interface IModalState {
   isOpen: boolean;
   modalType: ModalType;
   message?: string;
 }
+
 const initialState: IModalState = {
   isOpen: false,
   modalType: ModalType.SUCCESS,
@@ -23,24 +26,29 @@ export const modalSlice = createSlice({
     toggleModal: (state) => {
       state.isOpen = !state.isOpen;
     },
-    openSuccess: (state) => {
+    openSuccess: (state, action: PayloadAction<string>) => {
       state.isOpen = true;
       state.modalType = ModalType.SUCCESS;
+      state.message = action?.payload;
     },
-    openError: (state) => {
+    openError: (state, action: PayloadAction<string>) => {
       state.isOpen = true;
       state.modalType = ModalType.ERROR;
+      state.message = action?.payload;
     },
-    openWarning: (state) => {
+    openWarning: (state, action: PayloadAction<string>) => {
       state.isOpen = true;
       state.modalType = ModalType.WARNING;
+      state.message = action?.payload;
     },
-    openInfo: (state) => {
+    openInfo: (state, action: PayloadAction<string>) => {
       state.isOpen = true;
       state.modalType = ModalType.INFO;
+      state.message = action?.payload;
     },
   },
 });
+
 export const {
   openModal,
   closeModal,
@@ -50,4 +58,5 @@ export const {
   openWarning,
   openInfo,
 } = modalSlice.actions;
+
 export default modalSlice;

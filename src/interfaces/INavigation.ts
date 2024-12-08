@@ -1,35 +1,32 @@
-import type Screen from "@enums/Screen";
-import type {
-  NativeStackNavigationOptions,
-  NativeStackScreenProps,
-} from "@react-navigation/native-stack";
+import type RootScreen from "@enums/RootScreen";
+import type TabScreen from "@enums/TabScreen";
+import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+
 declare namespace INavigation {
-  export type IRootStack = {
-    HomeScreen?: undefined;
+  export type ITabStack = {
     AwardsScreen?: undefined;
     CollectedAwardsScreen?: undefined;
   };
-  export interface IPage {
-    name: keyof typeof Screen;
-    component: React.ComponentType<any>;
-    translate_key?: string;
-    options?: NativeStackNavigationOptions;
-  }
-  interface INavigationPage {
-    name: keyof typeof Screen;
-    params?: IRootStack[keyof IRootStack];
-  }
-  type IHomeScreenProps = NativeStackScreenProps<
+
+  export type IRootStack = {
+    HomeScreen: undefined;
+    BottomTabs: ITabStack;
+  };
+
+  type IHomeScreenProps = BottomTabScreenProps<
     INavigation.IRootStack,
-    Screen.HomeScreen
+    RootScreen.HomeScreen
   >;
-  type IAwardsScreenProps = NativeStackScreenProps<
-    INavigation.IRootStack,
-    Screen.AwardsScreen
+
+  type IAwardsScreenProps = BottomTabScreenProps<
+    INavigation.ITabStack,
+    TabScreen.AwardsScreen
   >;
-  type ICollectedAwardsScreenProps = NativeStackScreenProps<
-    INavigation.IRootStack,
-    Screen.CollectedAwardsScreen
+
+  type ICollectedAwardsScreenProps = BottomTabScreenProps<
+    INavigation.ITabStack,
+    TabScreen.CollectedAwardsScreen
   >;
 }
+
 export default INavigation;

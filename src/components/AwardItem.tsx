@@ -1,13 +1,23 @@
 import type { Award } from "@interfaces/IAward";
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Pressable,
+} from "react-native";
+import Icon from "./Icon";
 
-const AwardCard = (props: { item: Award; onSelect?: (award: Award) => void }) => {
+const AwardCard = (props: {
+  disableRedeem?: boolean;
+  item: Award;
+  onSelect?: (award: Award, isSelected: boolean) => void;
+  isSelected?: boolean;
+}) => {
   const handleSelect = () => {
-    if (award.is_active && award.availability > 0) {
-      props.onSelect?.(award);
-      console.log("Selected Award:", award.id);
-    }
+    props.onSelect?.(award, !props.isSelected);
   };
   const { item: award } = props;
   // Validation for required properties
@@ -19,6 +29,14 @@ const AwardCard = (props: { item: Award; onSelect?: (award: Award) => void }) =>
     <View style={[styles.card, !award.is_active && styles.inactiveCard]}>
       {/* Image */}
       <Image source={{ uri: award.image }} style={styles.image} />
+
+      {/* Fav Icon */}
+      <Pressable style={styles.favIcon} onPress={handleSelect}>
+        <Icon
+          name={props.isSelected ? "heart" : "heart-outline"}
+          color={props.isSelected ? "red" : "black"}
+        />
+      </Pressable>
 
       {/* Content */}
       <View style={styles.content}>
@@ -60,13 +78,15 @@ const AwardCard = (props: { item: Award; onSelect?: (award: Award) => void }) =>
             />
           </View>
         )}
-        <TouchableOpacity
-          disabled={!award.is_active}
-          onPress={handleSelect}
-          style={styles.button}
-        >
-          <Text style={{ color: "white" }}>Redeem</Text>
-        </TouchableOpacity>
+        {!props.disableRedeem && (
+          <TouchableOpacity
+            disabled={!award.is_active}
+            onPress={handleSelect}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Redeem</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -140,4 +160,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 10,
   },
+  favIcon: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    borderRadius: 50,
+    padding: 5,
+  },
+  buttonText: { color: "white" },
 });

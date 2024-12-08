@@ -8,12 +8,17 @@ import {
 import type { Award } from "@interfaces/IAward";
 import { useDispatch, useSelector } from "react-redux";
 import { type RootState, type AppDispatch } from "@store/store";
-import { openSuccess } from "@reducers/modalSlice";
+import { openSuccess, openWarning } from "@reducers/modalSlice";
 import AwardCard from "./AwardItem";
-import { addToCart } from "@reducers/cartSlice";
-import Error from "./Error";
+import { addToCart, removeFromCart } from "@reducers/cartSlice";
 import Loading from "./Loading";
-function AwardsList(props: Omit<FlatListProps<Award>, "renderItem">) {
+import Error from "./Error";
+function AwardsList(
+  props: Omit<FlatListProps<Award>, "renderItem"> & {
+    disableRedeem?: boolean;
+  }
+) {
+  const { disableRedeem = false } = props;
   const {
     data: bounties,
     loading,
@@ -21,18 +26,65 @@ function AwardsList(props: Omit<FlatListProps<Award>, "renderItem">) {
     errorMessage,
   } = useSelector((state: RootState) => state.bounties);
 
+  const { data: cart } = useSelector((state: RootState) => state.cart);
+
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleSelect = (award: Award) => {
-    if (award.is_active && award.availability > 0) {
+  const handleSelect = (award: Award, isSelected: boolean) => {
+    // if (award.is_active && award.availability > 0) {
+    //   dispatch(addToCart(award));
+    //   dispatch(openSuccess("Successfully added to cart"));
+    //   return;
+    // }
+
+    // console.log(award.is_active, award.availability);
+
+    // if (award.is_active) {
+    //   dispatch(openWarning("This award is not available"));
+    //   return;
+    // }
+
+    // if (award.availability <= 0) {
+    //   dispatch(openWarning("This award is not active"));
+    //   return;
+    // }
+
+    // if (!award.is_active && award.availability <= 0) {
+    //   dispatch(openWarning("This award is not available"));
+    //   return;
+    // }
+    if (isSelected) {
+      if (award.availability <= 0) {
+        dispatch(openWarning("This award is not available"));
+        return;
+      }
+
+      if (!award.is_active) {
+        dispatch(openWarning("This award is not active"));
+        return;
+      }
+
       dispatch(addToCart(award));
-      dispatch(openSuccess());
+      dispatch(openSuccess("Successfully added to Awards"));
+    }
+    if (!isSelected) {
+      dispatch(removeFromCart(award.id));
+      dispatch(openSuccess("Successfully removed from Awards"));
     }
   };
 
-  const renderAward = ({ item }: { item: Award }) => (
-    <AwardCard onSelect={handleSelect} item={item} />
-  );
+  const renderAward = ({ item }: { item: Award }) => {
+    const isInCart = cart.some((cartItem) => cartItem.id === item.id);
+
+    return (
+      <AwardCard
+        disableRedeem={disableRedeem || isInCart}
+        onSelect={handleSelect}
+        item={item}
+        isSelected={isInCart}
+      />
+    );
+  };
 
   if (loading) return <Loading />;
   if (error) return <Error message={errorMessage} />;
@@ -48,7 +100,7 @@ function AwardsList(props: Omit<FlatListProps<Award>, "renderItem">) {
         windowSize={4}
         contentContainerStyle={styles.contentContainer}
         style={styles.container}
-        data={bounties}
+        // data={bounties}
         {...props}
       />
     </SafeAreaView>

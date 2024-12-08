@@ -1,4 +1,3 @@
-import Screen from "@enums/Screen";
 import type INavigation from "@interfaces/INavigation";
 import React from "react";
 import { View, useColorScheme, StyleSheet, Button, Image } from "react-native";
@@ -24,10 +23,7 @@ function HomeScreen({ navigation }: INavigation.IHomeScreenProps) {
       ]}
     >
       <Image source={logo} style={styles.image} />
-      <Button
-        onPress={() => navigation.navigate(Screen.AwardsScreen)}
-        title="Awards"
-      />
+      <Button onPress={() => navigation.navigate("BottomTabs")} title="Awards" />
     </View>
   );
 }

@@ -1,5 +1,4 @@
 import AwardsList from "@components/AwardsList";
-import BottomTabs from "@components/BottomTabs";
 import { fetchBounties } from "@reducers/bountySlice";
 import type { AppDispatch, RootState } from "@store/store";
 import React, { useEffect } from "react";
@@ -17,7 +16,6 @@ function AwardsScreen() {
   return (
     <>
       <AwardsList data={data} />
-      <BottomTabs />
     </>
   );
 }

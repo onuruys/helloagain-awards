@@ -1,6 +1,6 @@
-export enum Screen {
-  "HomeScreen" = "HomeScreen",
+export enum TabScreen {
   "AwardsScreen" = "AwardsScreen",
   "CollectedAwardsScreen" = "CollectedAwardsScreen",
 }
-export default Screen;
+
+export default TabScreen;
