@@ -64,8 +64,9 @@ const TabScreens: ITabPagesDict = {
     component: AwardsScreen,
     options: {
       headerShown: true,
-      headerRight: HeaderHome,
       title: en.bounties,
+      headerRight: HeaderHome,
+      tabBarIcon: () => null,
     },
   },
   CollectedAwardsScreen: {
@@ -75,6 +76,7 @@ const TabScreens: ITabPagesDict = {
       title: en.awards,
       headerShown: true,
       headerRight: HeaderAwards,
+      tabBarIcon: () => null,
     },
   },
 };
