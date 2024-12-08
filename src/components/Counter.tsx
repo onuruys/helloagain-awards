@@ -1,23 +1,17 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { decrement, increment } from '../redux/reducers/counterSlice';
+import React from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment } from "../redux/reducers/counterSlice";
 export const Counter = () => {
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
   return (
     <View style={styles.row}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => dispatch(decrement())}
-      >
+      <TouchableOpacity style={styles.button} onPress={() => dispatch(decrement())}>
         <Text style={styles.buttonText}>-</Text>
       </TouchableOpacity>
       <Text style={styles.text}>{count}</Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => dispatch(increment())}
-      >
+      <TouchableOpacity style={styles.button} onPress={() => dispatch(increment())}>
         <Text style={styles.buttonText}>+</Text>
       </TouchableOpacity>
     </View>
@@ -26,22 +20,22 @@ export const Counter = () => {
 const styles = StyleSheet.create({
   row: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    flexDirection:'row',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+    flexDirection: "row",
   },
-   button: {
-    backgroundColor: 'gray',
+  button: {
+    backgroundColor: "gray",
     padding: 30,
     borderRadius: 10,
     margin: 40,
   },
-  buttonText:{
-    color:'white',
-    fontSize:20,
+  buttonText: {
+    color: "white",
+    fontSize: 20,
   },
-    text: {
+  text: {
     fontSize: 20,
   },
 });
