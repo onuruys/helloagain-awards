@@ -15,6 +15,8 @@ const icons: Record<string, React.FC<SvgProps>> = {
   information: require("@svg/information.svg").default,
   moon: require("@svg/moon.svg").default,
   sunny: require("@svg/sunny.svg").default,
+  trophy: require("@svg/trophy.svg").default,
+  list: require("@svg/list.svg").default,
 };
 
 interface IconProps {
@@ -31,8 +33,6 @@ const Icon: React.FC<IconProps> = ({ name, size = 24, color = "black", style }) 
     console.warn(`Icon with name "${name}" not found`);
     return null;
   }
-
-  console.log("icon name: ", name);
 
   return (
     <View style={style}>

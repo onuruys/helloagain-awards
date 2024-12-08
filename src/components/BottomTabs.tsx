@@ -2,8 +2,8 @@ import React from "react";
 
 import type INavigation from "../interfaces/INavigation";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { TabScreens } from "@screens/Pages";
 import TabScreen from "@enums/TabScreen";
+import { TabScreens } from "@screens/Pages";
 
 const Tab = createBottomTabNavigator<INavigation.ITabStack>();
 

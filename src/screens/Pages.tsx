@@ -11,6 +11,7 @@ import type { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import en from "@utils/en";
 import type { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import ToggleTheme from "@components/ToggleTheme";
+import Icon from "@components/Icon";
 
 export type IStackPagesDict = {
   [RootScreen.HomeScreen]: {
@@ -66,7 +67,9 @@ const TabScreens: ITabPagesDict = {
       headerShown: true,
       title: en.bounties,
       headerRight: HeaderHome,
-      tabBarIcon: () => null,
+      tabBarIcon: () => {
+        return <Icon name="list" size={24} />;
+      },
     },
   },
   CollectedAwardsScreen: {
@@ -76,7 +79,9 @@ const TabScreens: ITabPagesDict = {
       title: en.awards,
       headerShown: true,
       headerRight: HeaderAwards,
-      tabBarIcon: () => null,
+      tabBarIcon: () => {
+        return <Icon name="trophy" size={24} />;
+      },
     },
   },
 };
