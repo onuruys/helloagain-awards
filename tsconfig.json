@@ -1,3 +1,41 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ESNext",
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@actions/*": [
+        "./src/redux/actions/*"
+      ],
+      "@reducers/*": [
+        "./src/redux/reducers/*"
+      ],
+      "@store/*": [
+        "./src/redux/store/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@enums/*": [
+        "./src/enums/*"
+      ],
+      "@screens/*": [
+        "./src/screens/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+    }
+  }
 }
