@@ -11,6 +11,7 @@ import {
 import Icon from "./Icon";
 import type { Theme } from "@react-navigation/native";
 import Description from "./Description";
+import { spacing } from "@utils/Constants";
 const AwardCard = (props: {
   disableRedeem?: boolean;
   item: Award;
@@ -103,9 +104,9 @@ export default AwardCard;
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 10,
+    borderRadius: spacing.md,
     overflow: "hidden",
-    marginVertical: 10,
+    marginVertical: spacing.md,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -120,38 +121,38 @@ const styles = StyleSheet.create({
     height: 150,
   },
   content: {
-    padding: 15,
+    padding: spacing.md,
   },
   name: {
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 5,
+    marginBottom: spacing.sm,
   },
   description: {
     fontSize: 14,
     color: "#666",
-    marginBottom: 10,
+    marginBottom: spacing.sm,
   },
   points: {
     fontSize: 14,
     fontWeight: "600",
     color: "#333",
-    marginBottom: 5,
+    marginBottom: spacing.sm,
   },
   availability: {
     fontSize: 14,
     color: "#888",
-    marginBottom: 10,
+    marginBottom: spacing.sm,
   },
   validity: {
     fontSize: 12,
     color: "#999",
   },
   progressBar: {
-    height: 5,
+    height: spacing.sm,
     backgroundColor: "#eee",
-    borderRadius: 5,
-    marginTop: 10,
+    borderRadius: spacing.sm,
+    marginTop: spacing.md,
     overflow: "hidden",
   },
   progressFill: {
@@ -160,19 +161,19 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#2196F3",
-    padding: 10,
-    borderRadius: 5,
+    padding: spacing.md,
+    borderRadius: spacing.sm,
     alignSelf: "flex-start",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: spacing.md,
   },
   favIcon: {
     position: "absolute",
-    top: 10,
-    right: 10,
+    top: spacing.md,
+    right: spacing.md,
     backgroundColor: "rgba(255, 255, 255, 0.8)",
     borderRadius: 50,
-    padding: 5,
+    padding: spacing.sm,
   },
   buttonText: { color: "white" },
 });

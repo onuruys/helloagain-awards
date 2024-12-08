@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Icon from "./Icon";
 import ModalType from "@enums/ModalType";
 import { useTheme } from "@react-navigation/native";
+import { spacing } from "@utils/Constants";
 
 interface IModalProps {
   isOpen?: boolean;
@@ -120,17 +121,17 @@ const styles = StyleSheet.create({
     elevation: 5,
     zIndex: 1,
     display: "flex",
-    gap: 10,
+    gap: spacing.md,
   },
 
   modalText: {
-    marginBottom: 15,
+    marginBottom: spacing.md,
     textAlign: "center",
   },
   close: {
     position: "absolute",
-    top: 10,
-    right: 10,
+    top: spacing.md,
+    right: spacing.md,
   },
 });
 

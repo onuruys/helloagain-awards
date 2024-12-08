@@ -14,6 +14,7 @@ import { addToCart, removeFromCart } from "@reducers/cartSlice";
 import Loading from "./Loading";
 import Error from "./Error";
 import { useTheme } from "@react-navigation/native";
+import { spacing } from "@utils/Constants";
 function AwardsList(
   props: Omit<FlatListProps<Award>, "renderItem"> & {
     disableRedeem?: boolean;
@@ -112,7 +113,7 @@ function AwardsList(
 const styles = StyleSheet.create({
   contentContainer: {},
   container: {
-    padding: 16,
+    padding: spacing.md,
   },
 });
 

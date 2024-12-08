@@ -7,10 +7,10 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import type INavigation from "@interfaces/INavigation";
-import { StackScreens } from "@screens/Pages";
 import RootScreen from "@enums/RootScreen";
 import Modal from "@components/Modal";
 import { useTheme } from "./ManageThemeContext";
+import { StackScreens } from "@screens/Pages";
 const Stack = createNativeStackNavigator<INavigation.IRootStack>();
 export const rootNavigationRef =
   createNavigationContainerRef<INavigation.IRootStack>();
@@ -22,7 +22,14 @@ function Routes() {
       ref={rootNavigationRef}
       theme={mode == "dark" ? DarkTheme : DefaultTheme}
     >
-      <Stack.Navigator initialRouteName={RootScreen.HomeScreen}>
+      <Stack.Navigator
+        initialRouteName={RootScreen.HomeScreen}
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: mode == "dark" ? "#000" : "#fff",
+          },
+        }}
+      >
         {Object.values(StackScreens).map((screen) => {
           const { name, component, options } = screen;
           return (

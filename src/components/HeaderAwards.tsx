@@ -3,9 +3,10 @@ import { clearCart } from "@reducers/cartSlice";
 import type { AppDispatch } from "@store/store";
 import en from "@utils/en";
 import React from "react";
-import { Alert, Pressable } from "react-native";
+import { Alert, Pressable, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
 import Icon from "./Icon";
+import { spacing } from "@utils/Constants";
 function HeaderAwards() {
   const dispatch = useDispatch<AppDispatch>();
   const { colors } = useTheme();
@@ -19,9 +20,17 @@ function HeaderAwards() {
     ]);
   };
   return (
-    <Pressable onPress={alert}>
+    <Pressable onPress={alert} style={styles.container}>
       <Icon name="trash" size={24} color={colors.primary} />
     </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "flex-end",
+    paddingRight: spacing.md,
+  },
+});
 export default HeaderAwards;

@@ -17,6 +17,7 @@ const icons: Record<string, React.FC<SvgProps>> = {
   sunny: require("@svg/sunny.svg").default,
   trophy: require("@svg/trophy.svg").default,
   list: require("@svg/list.svg").default,
+  trash: require("@svg/trash.svg").default,
 };
 
 interface IconProps {
