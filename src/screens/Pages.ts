@@ -9,23 +9,19 @@ import HeaderAwards from "@components/HeaderAwards";
 import HeaderHome from "@components/HeaderHome";
 import type { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import en from "@utils/en";
+import type { NativeStackNavigationOptions } from "@react-navigation/native-stack";
+import ToggleTheme from "@components/ToggleTheme";
 
 export type IStackPagesDict = {
   [RootScreen.HomeScreen]: {
     name: RootScreen.HomeScreen;
     component: React.FC<INavigation.IHomeScreenProps>;
-    options: {
-      title: string;
-      headerShown: boolean;
-    };
+    options: NativeStackNavigationOptions;
   };
   [RootScreen.BottomTabs]: {
     name: RootScreen.BottomTabs;
     component: React.FC<INavigation.IHomeScreenProps>;
-    options: {
-      title: string;
-      headerShown: boolean;
-    };
+    options: NativeStackNavigationOptions;
   };
 };
 
@@ -48,7 +44,8 @@ const StackScreens: IStackPagesDict = {
     component: HomeScreen,
     options: {
       title: en.home,
-      headerShown: false,
+      // headerShown: false,
+      headerRight: ToggleTheme,
     },
   },
   BottomTabs: {

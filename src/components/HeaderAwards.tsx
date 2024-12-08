@@ -20,7 +20,7 @@ function HeaderAwards() {
   };
   return (
     <Pressable onPress={alert}>
-      <Icon name="exit" size={24} color={colors.primary} />
+      <Icon name="trash" size={24} color={colors.primary} />
     </Pressable>
   );
 }

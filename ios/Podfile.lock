@@ -1242,6 +1242,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - react-native-render-html (6.3.4):
+    - React-Core
   - react-native-safe-area-context (5.0.0):
     - DoubleConversion
     - glog
@@ -1682,6 +1684,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-render-html (from `../node_modules/react-native-render-html`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-vector-icons (from `../node_modules/@react-native-vector-icons/common`)"
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
@@ -1790,6 +1793,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-render-html:
+    :path: "../node_modules/react-native-render-html"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-vector-icons:
@@ -1889,6 +1894,7 @@ SPEC CHECKSUMS:
   React-logger: 2c393ba3d92c733db9979116ff61023b8ebe6d31
   React-Mapbuffer: e086ffb0c143c96e19fa114bef0ff27bab208dff
   React-microtasksnativemodule: 8e528efbba69994a8cb107b4698d028430e80f25
+  react-native-render-html: 984dfe2294163d04bf5fe25d7c9f122e60e05ebe
   react-native-safe-area-context: d6406c2adbd41b2e09ab1c386781dc1c81a90919
   react-native-vector-icons: 1c0923f822a6d103e0f3583b533c930803f21f4b
   React-nativeconfig: 2199ff468fce8b95d1776d9cea31d35076fe7e48

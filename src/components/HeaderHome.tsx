@@ -10,7 +10,11 @@ function HeaderHome() {
   const navigation =
     useNavigation<NativeStackNavigationProp<INavigation.IRootStack>>();
   return (
-    <Pressable onPress={() => navigation.navigate(RootScreen.HomeScreen)}>
+    <Pressable
+      onPress={() =>
+        navigation.reset({ index: 0, routes: [{ name: RootScreen.HomeScreen }] })
+      }
+    >
       <Icon name="home" size={24} color={colors.primary} />
     </Pressable>
   );

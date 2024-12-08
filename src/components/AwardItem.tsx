@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Icon from "./Icon";
 import type { Theme } from "@react-navigation/native";
-
+import Description from "./Description";
 const AwardCard = (props: {
   disableRedeem?: boolean;
   item: Award;
@@ -53,9 +53,7 @@ const AwardCard = (props: {
         <Text style={[styles.name, { color: colors.text }]}>{award.name}</Text>
 
         {/* Description */}
-        {award.description && (
-          <Text style={styles.description}>{award.description}</Text>
-        )}
+        {award.description && <Description description={award.description} />}
 
         {/* Needed Points */}
         <Text style={[styles.points]}>Points Required: {award.needed_points}</Text>

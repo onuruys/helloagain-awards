@@ -9,18 +9,18 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import type INavigation from "@interfaces/INavigation";
 import { StackScreens } from "@screens/Pages";
 import RootScreen from "@enums/RootScreen";
-import { useColorScheme } from "react-native";
 import Modal from "@components/Modal";
+import { useTheme } from "./ManageThemeContext";
 const Stack = createNativeStackNavigator<INavigation.IRootStack>();
 export const rootNavigationRef =
   createNavigationContainerRef<INavigation.IRootStack>();
 
 function Routes() {
-  const scheme = useColorScheme();
+  const { mode } = useTheme();
   return (
     <NavigationContainer
       ref={rootNavigationRef}
-      theme={scheme === "dark" ? DarkTheme : DefaultTheme}
+      theme={mode == "dark" ? DarkTheme : DefaultTheme}
     >
       <Stack.Navigator initialRouteName={RootScreen.HomeScreen}>
         {Object.values(StackScreens).map((screen) => {
