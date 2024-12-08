@@ -1,26 +1,19 @@
 import type { Award } from "@interfaces/IAward";
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  type ListRenderItem,
-} from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
-const AwardCard: ListRenderItem<Award> = (props) => {
+const AwardCard = (props: { item: Award; onSelect?: (award: Award) => void }) => {
+  const handleSelect = () => {
+    if (award.is_active && award.availability > 0) {
+      props.onSelect?.(award);
+      console.log("Selected Award:", award.id);
+    }
+  };
   const { item: award } = props;
   // Validation for required properties
   if (!award?.name || !award?.image || !award?.is_active) {
     return null; // Skip rendering if essential properties are missing
   }
-
-  const handleSelect = () => {
-    if (award.is_active && award.availability > 0) {
-      // onSelect(award.id); // Callback for handling card selection
-    }
-  };
 
   return (
     <TouchableOpacity

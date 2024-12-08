@@ -1,23 +1,25 @@
 import AwardsList from "@components/AwardsList";
-import type { Award } from "@interfaces/IAward";
-import AwardService from "@services/AwardService";
-import React, { useEffect, useState } from "react";
+import { fetchBounties } from "@reducers/bountySlice";
+import type { AppDispatch, RootState } from "@store/store";
+import React, { useEffect } from "react";
 import { View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+
 function AwardsScreen() {
-  const [data, setData] = useState<Award[]>([]);
+  const { data, loading } = useSelector((state: RootState) => state.bounties);
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    AwardService.GetAwards()
-      .then((data) => {
-        setData(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // fetchBounties();
+    if (!data.length && !loading) {
+      dispatch(fetchBounties());
+    }
   }, []);
+
   return (
     <View>
       <AwardsList data={data} />
     </View>
   );
 }
+
 export default AwardsScreen;

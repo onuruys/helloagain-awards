@@ -1,8 +1,10 @@
-import { Counter } from "@components/Counter";
+import Screen from "@enums/Screen";
 import type INavigation from "@interfaces/INavigation";
 import React from "react";
-import { View, Text, useColorScheme, Button } from "react-native";
-function HomeScreen(props: INavigation.IHomeScreenProps) {
+import { View, useColorScheme, StyleSheet, Button, Image } from "react-native";
+
+const logo = require("@images/hello_again_text_logo.png");
+function HomeScreen({ navigation }: INavigation.IHomeScreenProps) {
   const isDarkMode = useColorScheme() === "dark";
   const colors = {
     light: {
@@ -14,24 +16,32 @@ function HomeScreen(props: INavigation.IHomeScreenProps) {
       background: "black",
     },
   };
-
   return (
     <View
-      style={{
-        backgroundColor: colors[isDarkMode ? "dark" : "light"].background,
-        flex: 1,
-      }}
+      style={[
+        styles.container,
+        { backgroundColor: colors[isDarkMode ? "dark" : "light"].background },
+      ]}
     >
-      <Text style={{ color: colors[isDarkMode ? "dark" : "light"].text }}>
-        Home Screen
-      </Text>
-      <Counter />
+      <Image source={logo} style={styles.image} />
       <Button
-        onPress={() => props.navigation.navigate("AwardsScreen")}
+        onPress={() => navigation.navigate(Screen.AwardsScreen)}
         title="Awards"
       />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  image: {
+    resizeMode: "contain",
+    height: 96,
+  },
+});
 
 export default HomeScreen;
