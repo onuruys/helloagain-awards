@@ -16,6 +16,7 @@ function BottomTabs() {
           <Tab.Screen
             key={`screen-${name}`}
             name={name as TabScreen}
+            // @ts-ignore
             component={component}
             options={options}
           />

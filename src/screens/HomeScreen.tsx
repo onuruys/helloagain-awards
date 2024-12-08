@@ -23,7 +23,10 @@ function HomeScreen({ navigation }: INavigation.IHomeScreenProps) {
       ]}
     >
       <Image source={logo} style={styles.image} />
-      <Button onPress={() => navigation.navigate("BottomTabs")} title="Awards" />
+      <Button
+        onPress={() => navigation.navigate("BottomTabs")}
+        title="Check out bounties"
+      />
     </View>
   );
 }

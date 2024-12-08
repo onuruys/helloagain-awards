@@ -5,7 +5,6 @@
  * @format
  */
 
-import Modal from "@components/Modal";
 import { store } from "@store/store";
 import Routes from "@utils/Routes";
 import React from "react";
@@ -19,7 +18,6 @@ function App(): React.JSX.Element {
     <Provider store={store}>
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       <Routes />
-      <Modal />
     </Provider>
   );
 }

@@ -1,4 +1,6 @@
 import ModalType from "@enums/ModalType";
+import type RootScreen from "@enums/RootScreen";
+import type TabScreen from "@enums/TabScreen";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -6,6 +8,7 @@ interface IModalState {
   isOpen: boolean;
   modalType: ModalType;
   message?: string;
+  onConfirm?: TabScreen | RootScreen;
 }
 
 const initialState: IModalState = {
@@ -46,6 +49,15 @@ export const modalSlice = createSlice({
       state.modalType = ModalType.INFO;
       state.message = action?.payload;
     },
+    openConfirm: (
+      state,
+      action: PayloadAction<{ message: string; onConfirm: TabScreen | RootScreen }>
+    ) => {
+      state.isOpen = true;
+      state.modalType = ModalType.CONFIRM;
+      state.message = action?.payload.message;
+      state.onConfirm = action?.payload.onConfirm;
+    },
   },
 });
 
@@ -57,6 +69,7 @@ export const {
   openError,
   openWarning,
   openInfo,
+  openConfirm,
 } = modalSlice.actions;
 
 export default modalSlice;

@@ -9,24 +9,33 @@ import {
   Pressable,
 } from "react-native";
 import Icon from "./Icon";
+import type { Theme } from "@react-navigation/native";
 
 const AwardCard = (props: {
   disableRedeem?: boolean;
   item: Award;
   onSelect?: (award: Award, isSelected: boolean) => void;
   isSelected?: boolean;
+  colors: Theme["colors"];
 }) => {
+  const { item: award, colors } = props;
+
   const handleSelect = () => {
     props.onSelect?.(award, !props.isSelected);
   };
-  const { item: award } = props;
-  // Validation for required properties
   if (!award?.name || !award?.image || !award?.is_active) {
     return null; // Skip rendering if essential properties are missing
   }
-
   return (
-    <View style={[styles.card, !award.is_active && styles.inactiveCard]}>
+    <View
+      style={[
+        styles.card,
+        !award.is_active && styles.inactiveCard,
+        {
+          backgroundColor: colors.card,
+        },
+      ]}
+    >
       {/* Image */}
       <Image source={{ uri: award.image }} style={styles.image} />
 
@@ -41,7 +50,7 @@ const AwardCard = (props: {
       {/* Content */}
       <View style={styles.content}>
         {/* Award Name */}
-        <Text style={styles.name}>{award.name}</Text>
+        <Text style={[styles.name, { color: colors.text }]}>{award.name}</Text>
 
         {/* Description */}
         {award.description && (
@@ -49,7 +58,7 @@ const AwardCard = (props: {
         )}
 
         {/* Needed Points */}
-        <Text style={styles.points}>Points Required: {award.needed_points}</Text>
+        <Text style={[styles.points]}>Points Required: {award.needed_points}</Text>
 
         {/* Availability */}
         <Text style={styles.availability}>
@@ -96,7 +105,6 @@ export default AwardCard;
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff",
     borderRadius: 10,
     overflow: "hidden",
     marginVertical: 10,

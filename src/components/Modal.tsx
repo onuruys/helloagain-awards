@@ -5,6 +5,7 @@ import { Modal as RNModal, StyleSheet, Text, Pressable } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "./Icon";
 import ModalType from "@enums/ModalType";
+import { useTheme } from "@react-navigation/native";
 
 interface IModalProps {
   isOpen?: boolean;
@@ -15,11 +16,16 @@ function Modal(props: IModalProps) {
   const { isOpen, modalType, message } = useSelector(
     (state: RootState) => state.modal
   );
+  const { colors } = useTheme();
   const dispatch = useDispatch<AppDispatch>();
 
   function onClose() {
     props.onClose?.();
     dispatch(closeModal());
+  }
+
+  function onConfirm() {
+    onClose();
   }
 
   function status(type: ModalType) {
@@ -48,10 +54,16 @@ function Modal(props: IModalProps) {
           color: "orange",
           defaultMessage: "Warning",
         };
+      case ModalType.CONFIRM:
+        return {
+          name: "help",
+          color: "blue",
+          defaultMessage: "Confirm",
+        };
       default:
         return {
           name: "alert-circle",
-          color: "black",
+          color: colors.text,
           defaultMessage: "",
         };
     }
@@ -69,12 +81,16 @@ function Modal(props: IModalProps) {
         onClose();
       }}
     >
-      <Pressable style={styles.centeredView} onPress={onClose}>
-        <Pressable style={styles.modalView}>
+      <Pressable style={[styles.centeredView]} onPress={onClose}>
+        <Pressable style={[styles.modalView, { backgroundColor: colors.card }]}>
           <Icon name={name} size={48} color={color} />
-          <Text style={styles.modalText}>{message || defaultMessage}</Text>
           <Pressable onPress={onClose} style={styles.close}>
-            <Icon name="close" size={24} />
+            <Icon name="close" size={24} color={colors.text} />
+          </Pressable>
+          <Pressable onPress={onConfirm}>
+            <Text style={[styles.modalText, { color: colors.text }]}>
+              {message || defaultMessage}
+            </Text>
           </Pressable>
         </Pressable>
       </Pressable>
@@ -103,6 +119,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     zIndex: 1,
+    display: "flex",
+    gap: 10,
   },
 
   modalText: {

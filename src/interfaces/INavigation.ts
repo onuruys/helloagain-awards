@@ -10,7 +10,7 @@ declare namespace INavigation {
 
   export type IRootStack = {
     HomeScreen: undefined;
-    BottomTabs: ITabStack;
+    BottomTabs: undefined;
   };
 
   type IHomeScreenProps = BottomTabScreenProps<

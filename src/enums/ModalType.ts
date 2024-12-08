@@ -3,5 +3,6 @@ export enum ModalType {
   ERROR = "ERROR",
   WARNING = "WARNING",
   INFO = "INFO",
+  CONFIRM = "CONFIRM",
 }
 export default ModalType;

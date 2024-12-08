@@ -13,6 +13,7 @@ import AwardCard from "./AwardItem";
 import { addToCart, removeFromCart } from "@reducers/cartSlice";
 import Loading from "./Loading";
 import Error from "./Error";
+import { useTheme } from "@react-navigation/native";
 function AwardsList(
   props: Omit<FlatListProps<Award>, "renderItem"> & {
     disableRedeem?: boolean;
@@ -29,7 +30,7 @@ function AwardsList(
   const { data: cart } = useSelector((state: RootState) => state.cart);
 
   const dispatch = useDispatch<AppDispatch>();
-
+  const { colors } = useTheme();
   const handleSelect = (award: Award, isSelected: boolean) => {
     // if (award.is_active && award.availability > 0) {
     //   dispatch(addToCart(award));
@@ -82,6 +83,7 @@ function AwardsList(
         onSelect={handleSelect}
         item={item}
         isSelected={isInCart}
+        colors={colors}
       />
     );
   };
