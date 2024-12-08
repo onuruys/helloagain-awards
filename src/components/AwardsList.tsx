@@ -2,6 +2,7 @@ import React from "react";
 import { FlatList, StyleSheet, type FlatListProps } from "react-native";
 import AwardItem from "./AwardItem";
 import type { Award } from "@interfaces/IAward";
+
 function AwardsList(props: Omit<FlatListProps<Award>, "renderItem">) {
   return (
     <FlatList
@@ -17,8 +18,12 @@ function AwardsList(props: Omit<FlatListProps<Award>, "renderItem">) {
     />
   );
 }
+
 const styles = StyleSheet.create({
   contentContainer: {},
-  container: {},
+  container: {
+    padding: 16,
+  },
 });
+
 export default AwardsList;
