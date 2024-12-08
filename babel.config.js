@@ -28,6 +28,7 @@ module.exports = {
           "@services": "./src/services",
           "@utils": "./src/utils",
           "@images": "./assets/images",
+          "@svg": "./assets/svg",
         },
       },
     ],

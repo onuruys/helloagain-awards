@@ -39,6 +39,9 @@
       "@images/*": [
         "./assets/images/*"
       ],
+      "@svg/*": [
+        "./assets/svg/*"
+      ],
     }
   }
 }
