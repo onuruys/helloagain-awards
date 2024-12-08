@@ -1,3 +1,4 @@
+import { Counter } from "@components/Counter";
 import type INavigation from "@interfaces/INavigation";
 import React from "react";
 import { View, Text, SafeAreaView, useColorScheme } from "react-native";
@@ -16,15 +17,14 @@ function HomeScreen(props: INavigation.IHomeScreenProps) {
   };
 
   return (
-    <SafeAreaView>
       <View
-        style={{ backgroundColor: colors[isDarkMode ? "dark" : "light"].background }}
+        style={{ backgroundColor: colors[isDarkMode ? "dark" : "light"].background, flex: 1 }}
       >
         <Text style={{ color: colors[isDarkMode ? "dark" : "light"].text }}>
           Home Screen
         </Text>
+        <Counter />
       </View>
-    </SafeAreaView>
   );
 }
 

@@ -4,7 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import Screens from "@screens/Pages";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import type INavigation from "@interfaces/INavigation";
+
 const Stack = createNativeStackNavigator<INavigation.IRootStack>();
+
 function Routes() {
   return (
     <NavigationContainer>
@@ -24,4 +26,5 @@ function Routes() {
     </NavigationContainer>
   );
 }
+
 export default Routes;
