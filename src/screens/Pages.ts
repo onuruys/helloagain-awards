@@ -2,7 +2,7 @@ import Screen from "@enums/Screen";
 import INavigation from "@interfaces/INavigation";
 import AwardsScreen from "./AwardsScreen";
 import HomeScreen from "./HomeScreen";
-import ProfileScreen from "./ProfileScreen";
+import CollectedAwardsScreen from "./CollectedAwardsScreen";
 export type IPagesDict = {
   [key in keyof typeof Screen]: INavigation.IPage;
 };
@@ -15,9 +15,9 @@ const Screens: IPagesDict = {
     name: "AwardsScreen",
     component: AwardsScreen,
   },
-  ProfileScreen: {
-    name: "ProfileScreen",
-    component: ProfileScreen,
+  CollectedAwardsScreen: {
+    name: "CollectedAwardsScreen",
+    component: CollectedAwardsScreen,
   },
 };
 export default Screens;

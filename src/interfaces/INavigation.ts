@@ -7,7 +7,7 @@ declare namespace INavigation {
   export type IRootStack = {
     HomeScreen?: undefined;
     AwardsScreen?: undefined;
-    ProfileScreen?: undefined;
+    CollectedAwardsScreen?: undefined;
   };
   export interface IPage {
     name: keyof typeof Screen;
@@ -27,9 +27,9 @@ declare namespace INavigation {
     INavigation.IRootStack,
     Screen.AwardsScreen
   >;
-  type IProfileScreenProps = NativeStackScreenProps<
+  type ICollectedAwardsScreenProps = NativeStackScreenProps<
     INavigation.IRootStack,
-    Screen.ProfileScreen
+    Screen.CollectedAwardsScreen
   >;
 }
 export default INavigation;

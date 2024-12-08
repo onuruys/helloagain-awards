@@ -3,15 +3,16 @@ import {
   FlatList,
   SafeAreaView,
   StyleSheet,
-  Text,
   type FlatListProps,
 } from "react-native";
 import type { Award } from "@interfaces/IAward";
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch } from "@store/store";
-import { type RootState } from "@store/store";
+import { type RootState, type AppDispatch } from "@store/store";
 import { openSuccess } from "@reducers/modalSlice";
 import AwardCard from "./AwardItem";
+import { addToCart } from "@reducers/cartSlice";
+import Error from "./Error";
+import Loading from "./Loading";
 function AwardsList(props: Omit<FlatListProps<Award>, "renderItem">) {
   const {
     data: bounties,
@@ -24,6 +25,7 @@ function AwardsList(props: Omit<FlatListProps<Award>, "renderItem">) {
 
   const handleSelect = (award: Award) => {
     if (award.is_active && award.availability > 0) {
+      dispatch(addToCart(award));
       dispatch(openSuccess());
     }
   };
@@ -32,13 +34,12 @@ function AwardsList(props: Omit<FlatListProps<Award>, "renderItem">) {
     <AwardCard onSelect={handleSelect} item={item} />
   );
 
-  if (loading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error: {errorMessage}</Text>;
+  if (loading) return <Loading />;
+  if (error) return <Error message={errorMessage} />;
 
   return (
     <SafeAreaView>
       <FlatList
-        {...props}
         keyboardShouldPersistTaps="handled"
         horizontal={false}
         keyExtractor={(item) => item.id.toString()}
@@ -48,6 +49,7 @@ function AwardsList(props: Omit<FlatListProps<Award>, "renderItem">) {
         contentContainerStyle={styles.contentContainer}
         style={styles.container}
         data={bounties}
+        {...props}
       />
     </SafeAreaView>
   );

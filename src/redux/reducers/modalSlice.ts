@@ -3,10 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 interface IModalState {
   isOpen: boolean;
   modalType: ModalType;
+  message?: string;
 }
 const initialState: IModalState = {
   isOpen: false,
   modalType: ModalType.SUCCESS,
+  message: "",
 };
 export const modalSlice = createSlice({
   name: "modal",

@@ -16,11 +16,7 @@ const AwardCard = (props: { item: Award; onSelect?: (award: Award) => void }) =>
   }
 
   return (
-    <TouchableOpacity
-      style={[styles.card, !award.is_active && styles.inactiveCard]}
-      onPress={handleSelect}
-      disabled={!award.is_active}
-    >
+    <View style={[styles.card, !award.is_active && styles.inactiveCard]}>
       {/* Image */}
       <Image source={{ uri: award.image }} style={styles.image} />
 
@@ -64,8 +60,15 @@ const AwardCard = (props: { item: Award; onSelect?: (award: Award) => void }) =>
             />
           </View>
         )}
+        <TouchableOpacity
+          disabled={!award.is_active}
+          onPress={handleSelect}
+          style={styles.button}
+        >
+          <Text style={{ color: "white" }}>Redeem</Text>
+        </TouchableOpacity>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -128,5 +131,13 @@ const styles = StyleSheet.create({
   progressFill: {
     height: "100%",
     backgroundColor: "#4caf50",
+  },
+  button: {
+    backgroundColor: "#2196F3",
+    padding: 10,
+    borderRadius: 5,
+    alignSelf: "flex-start",
+    alignItems: "center",
+    marginTop: 10,
   },
 });
